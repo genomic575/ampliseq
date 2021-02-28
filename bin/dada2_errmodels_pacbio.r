@@ -30,6 +30,10 @@ option_list = list(
     help="Print progress messages."
   ),
   make_option(
+    c("-v", "--threads"), type='integer', default=1,
+    help="Number of threads."
+  ),
+  make_option(
     c("--version"), action="store_true", default=FALSE,
     help="Print version of script and DADA2 library."
   )
@@ -65,7 +69,7 @@ suppressPackageStartupMessages(library(ShortRead))
 # Do the error estimation, save rds for error profile
 files=list.files(opt$filterDir,full.names=T)
 logmsg( sprintf("Using files: %s", files))
-err <- learnErrors(files, errorEstimationFunction=PacBioErrfun, multithread=TRUE, randomize=FALSE, verbose=opt$verbose, nbases=as.double(opt$nbases))
+err <- learnErrors(files, errorEstimationFunction=PacBioErrfun, multithread=opt$threads, randomize=FALSE, verbose=opt$verbose, nbases=as.double(opt$nbases))
 saveRDS(err,sprintf('%serr.rds', opt$prefix))
 
 logmsg(sprintf("Finished error estimation"))

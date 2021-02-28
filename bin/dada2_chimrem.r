@@ -59,6 +59,10 @@ option_list = list(
     help='File for writing ASV sequences in fasta format. Default: "sequences.fasta"'
   ),
   make_option(
+    c("-v", "--threads"), type='integer', default=1,
+    help="Number of threads."
+  ),
+  make_option(
     c('-v', '--verbose'), action="store_true", default=FALSE,
     help="Print progress messages."
   ),
@@ -107,7 +111,7 @@ nochim <- removeBimeraDenovo(
        allowOneOff=opt$allowOneOff,
        minFoldParentOverAbundance=opt$overab,
        minParentAbundance = opt$minab,
-       multithread=T,
+       multithread=opt$threads,
        verbose=opt$verbose
 )
 

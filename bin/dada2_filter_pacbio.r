@@ -50,6 +50,10 @@ option_list = list(
     help="Print progress messages."
   ),
   make_option(
+    c("-v", "--threads"), type='integer', default=1,
+    help="Number of threads."
+  ),
+  make_option(
     c("--version"), action="store_true", default=FALSE,
     help="Print version of this script and of DADA2 library."
   )
@@ -92,7 +96,7 @@ logmsg( sprintf( "Read quality filtering with filterAndTrim. Options used:\n  ma
 input <- read.table(opt$infile, header = TRUE, sep = ",", colClasses = "character")
 
 filt <- file.path(opt$filterDir, basename(input$absolute.filepath))
-res_filt <- filterAndTrim(input$absolute.filepath, filt, maxN = 0, maxEE = opt$maxEE, truncQ = opt$truncQ, truncLen = opt$truncLen, minLen = opt$minLen, maxLen = opt$maxLen, compress = T, multithread = T, verbose = opt$verbose)
+res_filt <- filterAndTrim(input$absolute.filepath, filt, maxN = 0, maxEE = opt$maxEE, truncQ = opt$truncQ, truncLen = opt$truncLen, minLen = opt$minLen, maxLen = opt$maxLen, compress = T, multithread = opt$threads, verbose = opt$verbose)
 
 input["file"] <- basename(input$absolute.filepath)
 output <- merge(input,res_filt, by.x="file", by.y ="row.names")

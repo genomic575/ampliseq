@@ -30,6 +30,10 @@ make_option(
     help='Whether to pool together all samples prior to sample inference. Possible options: TRUE, pseudo, FALSE. Default: TRUE'
   ),
   make_option(
+    c("-v", "--threads"), type='integer', default=1,
+    help="Number of threads."
+  ),
+  make_option(
     c("-v", "--verbose"), action="store_true", default=FALSE,
     help="Print progress messages."
   ),
@@ -90,7 +94,7 @@ files=list.files(opt$filterDir,full.names=T)
 derep <- derepFastq(files, verbose = opt$verbose)
 
 # Denoising, save rds for dada2 object
-dd <- dada(derep, err=err, multithread=T, pool=opt$pool)
+dd <- dada(derep, err=err, multithread=opt$threads, pool=opt$pool)
 saveRDS(dd,sprintf('%sdd.rds', opt$prefix))
 
 logmsg(sprintf("Finished denoising"))
