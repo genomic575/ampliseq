@@ -59,7 +59,7 @@ option_list = list(
     help='File for writing ASV sequences in fasta format. Default: "sequences.fasta"'
   ),
   make_option(
-    c("-v", "--threads"), type='integer', default=1,
+    c("--threads"), type='integer', default=1,
     help="Number of threads."
   ),
   make_option(

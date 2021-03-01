@@ -30,7 +30,7 @@ option_list = list(
     help="Print progress messages."
   ),
   make_option(
-    c("-v", "--threads"), type='integer', default=1,
+    c("--threads"), type='integer', default=1,
     help="Number of threads."
   ),
   make_option(

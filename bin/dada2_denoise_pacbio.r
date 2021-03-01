@@ -30,7 +30,7 @@ make_option(
     help='Whether to pool together all samples prior to sample inference. Possible options: TRUE, pseudo, FALSE. Default: TRUE'
   ),
   make_option(
-    c("-v", "--threads"), type='integer', default=1,
+    c("--threads"), type='integer', default=1,
     help="Number of threads."
   ),
   make_option(
