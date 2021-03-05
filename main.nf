@@ -1035,12 +1035,14 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 		IFS=',' read -r -a trunclen <<< \"$trunc\"
 
 		#denoise samples with DADA2 and produce
+		#PJW: Added '--p-n-reads-learn 200000'
 		qiime dada2 denoise-paired  \
 			--i-demultiplexed-seqs ${demux}  \
 			--p-trunc-len-f \${trunclen[0]} \
 			--p-trunc-len-r \${trunclen[1]} \
 			--p-max-ee-f ${params.maxEE} \
 			--p-max-ee-r ${params.maxEE} \
+			--p-n-reads-learn 200000 \
 			--p-n-threads 0  \
 			--o-table table.qza  \
 			--o-representative-sequences rep-seqs.qza  \
