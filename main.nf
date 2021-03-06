@@ -1185,7 +1185,7 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 		#denoise samples with DADA2 and produce
 		#PJW: Added '--p-n-reads-learn 200000'
 		#PJW: changed '--p-n-threads 0  \' to '--p-n-threads 64  \'
-		#Needed to add 128 CPUs in 'process dada_single' in nextflow.config
+		#Needed to add 128 CPUs for process dada_multi in nextflow.config
 		#https://forum.qiime2.org/t/dada2-error-return-code-1/7140/3
 		qiime dada2 denoise-paired  \
 			--i-demultiplexed-seqs ${demux}  \
