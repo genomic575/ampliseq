@@ -1122,20 +1122,20 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 		script:
 		"""
 		# Quality filtering with DADA2 filterAndTrim
-		dada2_filter_pacbio.r --infile ${demux} --filterDir dada2_filtered --maxEE ${params.maxEE} --truncLen ${trunc} --minLen ${params.minLen} --maxLen ${params.maxLen} --stats filter_stats.tsv --verbose
+		dada2_filter_pacbio.r --infile ${demux} --filterDir dada2_filtered --maxEE ${params.maxEE} --truncLen ${trunc} --minLen ${params.minLen} --maxLen ${params.maxLen} --stats filter_stats.tsv --threads 128 --verbose
 
 		# Estimation of error models with DADA2 learnErrors
-		dada2_errmodels_pacbio.r --filterDir dada2_filtered > err.out
+		dada2_errmodels_pacbio.r --filterDir dada2_filtered --threads 128 > err.out
 
 		# Denoise samples with DADA2
-		dada2_denoise_pacbio.r --filterDir dada2_filtered --errModel err.rds --pool TRUE  --verbose > dd.out
+		dada2_denoise_pacbio.r --filterDir dada2_filtered --errModel err.rds --pool TRUE --threads 128 --verbose > dd.out
 
 		# Chimera removal with DADA2, and produce
 		# * raw count table "feature-table.tsv"
 		# * relative abundancies "rel-feature-table.tsv"
                 # * DADA2 stats to file "denoise_stats.tsv"
 		# * representative sequences "sequences.fasta"
-		dada2_chimrem.r --manifest ${demux} --dadaObj dd.rds --method "pooled" --allowOneOff TRUE --table feature-table.tsv --reltable rel-feature-table.tsv --repseqs sequences.fasta --stats denoise_stats.tsv
+		dada2_chimrem.r --manifest ${demux} --dadaObj dd.rds --method "pooled" --allowOneOff TRUE --table feature-table.tsv --reltable rel-feature-table.tsv --repseqs sequences.fasta --stats denoise_stats.tsv --threads 128
 
 		# Create qiime2 object from representative sequences
 		qiime tools import --type \'FeatureData[Sequence]\' \
