@@ -1042,7 +1042,7 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 			--p-trunc-len-r \${trunclen[1]} \
 			--p-max-ee-f ${params.maxEE} \
 			--p-max-ee-r ${params.maxEE} \
-			--p-n-reads-learn 200000 \
+			--p-n-reads-learn 20000 \
 			--p-n-threads 0  \
 			--o-table table.qza  \
 			--o-representative-sequences rep-seqs.qza  \
