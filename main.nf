@@ -1186,6 +1186,7 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 			--p-trunc-len-r ${trunclenr} \
 			--p-max-ee-f ${params.maxEE} \
 			--p-max-ee-r ${params.maxEE} \
+			--p-n-reads-learn 20000 \
 			--p-n-threads 0  \
 			--o-table ${demux.baseName}-table.qza  \
 			--o-representative-sequences ${demux.baseName}-rep-seqs.qza  \
