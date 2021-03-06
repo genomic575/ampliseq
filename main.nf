@@ -1036,6 +1036,8 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 
 		#denoise samples with DADA2 and produce
 		#PJW: Added '--p-n-reads-learn 200000'
+		#PJW: changed '--p-n-threads 0  \' to '--p-n-threads 8  \'
+		#https://forum.qiime2.org/t/dada2-error-return-code-1/7140/3
 		qiime dada2 denoise-paired  \
 			--i-demultiplexed-seqs ${demux}  \
 			--p-trunc-len-f \${trunclen[0]} \
@@ -1043,7 +1045,7 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 			--p-max-ee-f ${params.maxEE} \
 			--p-max-ee-r ${params.maxEE} \
 			--p-n-reads-learn 20000 \
-			--p-n-threads 0  \
+			--p-n-threads 8  \
 			--o-table table.qza  \
 			--o-representative-sequences rep-seqs.qza  \
 			--o-denoising-stats stats.qza \
@@ -1180,6 +1182,9 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 		export HOME="\${PWD}/HOME"
 
 		#denoise samples with DADA2 and produce
+		#PJW: Added '--p-n-reads-learn 200000'
+		#PJW: changed '--p-n-threads 0  \' to '--p-n-threads 8  \'
+		#https://forum.qiime2.org/t/dada2-error-return-code-1/7140/3
 		qiime dada2 denoise-paired  \
 			--i-demultiplexed-seqs ${demux}  \
 			--p-trunc-len-f ${trunclenf} \
@@ -1187,7 +1192,7 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 			--p-max-ee-f ${params.maxEE} \
 			--p-max-ee-r ${params.maxEE} \
 			--p-n-reads-learn 20000 \
-			--p-n-threads 0  \
+			--p-n-threads 8  \
 			--o-table ${demux.baseName}-table.qza  \
 			--o-representative-sequences ${demux.baseName}-rep-seqs.qza  \
 			--o-denoising-stats ${demux.baseName}-stats.qza \
