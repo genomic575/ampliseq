@@ -1045,7 +1045,7 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 			--p-trunc-len-r \${trunclen[1]} \
 			--p-max-ee-f ${params.maxEE} \
 			--p-max-ee-r ${params.maxEE} \
-			--p-n-reads-learn 200000 \
+			--p-n-reads-learn 500000 \
 			--p-n-threads 64  \
 			--o-table table.qza  \
 			--o-representative-sequences rep-seqs.qza  \
@@ -1183,7 +1183,7 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 		export HOME="\${PWD}/HOME"
 
 		#denoise samples with DADA2 and produce
-		#PJW: Added '--p-n-reads-learn 200000'
+		#PJW: Added '--p-n-reads-learn 500000'
 		#PJW: changed '--p-n-threads 0  \' to '--p-n-threads 64  \'
 		#Needed to add 128 CPUs for process dada_multi in nextflow.config
 		#https://forum.qiime2.org/t/dada2-error-return-code-1/7140/3
@@ -1193,7 +1193,7 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 			--p-trunc-len-r ${trunclenr} \
 			--p-max-ee-f ${params.maxEE} \
 			--p-max-ee-r ${params.maxEE} \
-			--p-n-reads-learn 200000 \
+			--p-n-reads-learn 500000 \
 			--p-n-threads 64  \
 			--o-table ${demux.baseName}-table.qza  \
 			--o-representative-sequences ${demux.baseName}-rep-seqs.qza  \
