@@ -1131,7 +1131,7 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 
 		# Denoise samples with DADA2
 		#PJW: added '--threads 32'
-		dada2_denoise_pacbio.r --filterDir dada2_filtered --errModel err.rds --pool TRUE --threads 32 --verbose > dd.out
+		dada2_denoise_pacbio.r --filterDir dada2_filtered --errModel err.rds --pool TRUE --verbose > dd.out
 
 		# Chimera removal with DADA2, and produce
 		# * raw count table "feature-table.tsv"
