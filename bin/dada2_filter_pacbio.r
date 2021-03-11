@@ -92,9 +92,9 @@ logmsg( sprintf( "Read quality filtering with filterAndTrim. Options used:\n  ma
 input <- read.table(opt$infile, header = TRUE, sep = ",", colClasses = "character")
 
 filt <- file.path(opt$filterDir, basename(input$absolute.filepath))
-# PJW. Changed 'multithread = T' to multithread = 32', added 'qualityType = "FastqQuality"'
+# PJW. Changed 'multithread = T' to 'multithread = 32'
 # See filterAndTrim help file in R, particularly qualityType =
-res_filt <- filterAndTrim(input$absolute.filepath, filt, maxN = 0, maxEE = opt$maxEE, truncQ = opt$truncQ, truncLen = opt$truncLen, minLen = opt$minLen, maxLen = opt$maxLen, compress = T, multithread = 32, verbose = opt$verbose, qualityType = "FastqQuality")
+res_filt <- filterAndTrim(input$absolute.filepath, filt, maxN = 0, maxEE = opt$maxEE, truncQ = opt$truncQ, truncLen = opt$truncLen, minLen = opt$minLen, maxLen = opt$maxLen, compress = T, multithread = 32, verbose = opt$verbose)
 
 input["file"] <- basename(input$absolute.filepath)
 output <- merge(input,res_filt, by.x="file", by.y ="row.names")
