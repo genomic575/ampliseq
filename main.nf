@@ -1123,11 +1123,11 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 		"""
 		# Quality filtering with DADA2 filterAndTrim
 		#PJW: added '--threads 32'
-		dada2_filter_pacbio.r --infile ${demux} --filterDir dada2_filtered --maxEE ${params.maxEE} --truncLen ${trunc} --minLen ${params.minLen} --maxLen ${params.maxLen} --stats filter_stats.tsv --threads 32 --verbose
+		dada2_filter_pacbio.r --infile ${demux} --filterDir dada2_filtered --maxEE ${params.maxEE} --truncLen ${trunc} --minLen ${params.minLen} --maxLen ${params.maxLen} --stats filter_stats.tsv --verbose
 
 		# Estimation of error models with DADA2 learnErrors
 		#PJW: added '--threads 32'
-		dada2_errmodels_pacbio.r --filterDir dada2_filtered --threads 32 > err.out
+		dada2_errmodels_pacbio.r --filterDir dada2_filtered > err.out
 
 		# Denoise samples with DADA2
 		#PJW: added '--threads 32'
@@ -1139,7 +1139,7 @@ if (!params.multipleSequencingRuns && !params.pacbio){
                 # * DADA2 stats to file "denoise_stats.tsv"
 		# * representative sequences "sequences.fasta"
 		#PJW: added '--threads 32'
-		dada2_chimrem.r --manifest ${demux} --dadaObj dd.rds --method "pooled" --allowOneOff TRUE --table feature-table.tsv --reltable rel-feature-table.tsv --repseqs sequences.fasta --stats denoise_stats.tsv --threads 32
+		dada2_chimrem.r --manifest ${demux} --dadaObj dd.rds --method "pooled" --allowOneOff TRUE --table feature-table.tsv --reltable rel-feature-table.tsv --repseqs sequences.fasta --stats denoise_stats.tsv
 
 		# Create qiime2 object from representative sequences
 		qiime tools import --type \'FeatureData[Sequence]\' \
