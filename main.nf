@@ -1036,7 +1036,7 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 
 		#denoise samples with DADA2 and produce
 		#PJW: Added '--p-n-reads-learn 2000000'
-		#PJW: changed '--p-n-threads 0  \' to '--p-n-threads 64  \'
+		#PJW: changed '--p-n-threads 0  \' to '--p-n-threads 32  \'
 		#Needed to add 128 CPUs in 'process dada_single' in nextflow.config
 		#https://forum.qiime2.org/t/dada2-error-return-code-1/7140/3
 		qiime dada2 denoise-paired  \
@@ -1045,8 +1045,8 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 			--p-trunc-len-r \${trunclen[1]} \
 			--p-max-ee-f ${params.maxEE} \
 			--p-max-ee-r ${params.maxEE} \
-			--p-n-reads-learn 500000 \
-			--p-n-threads 64  \
+			--p-n-reads-learn 200000 \
+			--p-n-threads 32  \
 			--o-table table.qza  \
 			--o-representative-sequences rep-seqs.qza  \
 			--o-denoising-stats stats.qza \
@@ -1183,8 +1183,8 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 		export HOME="\${PWD}/HOME"
 
 		#denoise samples with DADA2 and produce
-		#PJW: Added '--p-n-reads-learn 500000'
-		#PJW: changed '--p-n-threads 0  \' to '--p-n-threads 64  \'
+		#PJW: Added '--p-n-reads-learn 200000'
+		#PJW: changed '--p-n-threads 0  \' to '--p-n-threads 32  \'
 		#Needed to add 128 CPUs for process dada_multi in nextflow.config
 		#https://forum.qiime2.org/t/dada2-error-return-code-1/7140/3
 		qiime dada2 denoise-paired  \
@@ -1193,8 +1193,8 @@ if (!params.multipleSequencingRuns && !params.pacbio){
 			--p-trunc-len-r ${trunclenr} \
 			--p-max-ee-f ${params.maxEE} \
 			--p-max-ee-r ${params.maxEE} \
-			--p-n-reads-learn 500000 \
-			--p-n-threads 64  \
+			--p-n-reads-learn 200000 \
+			--p-n-threads 32  \
 			--o-table ${demux.baseName}-table.qza  \
 			--o-representative-sequences ${demux.baseName}-rep-seqs.qza  \
 			--o-denoising-stats ${demux.baseName}-stats.qza \
