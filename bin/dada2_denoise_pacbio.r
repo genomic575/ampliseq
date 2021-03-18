@@ -90,9 +90,9 @@ files=list.files(opt$filterDir,full.names=T)
 derep <- derepFastq(files, verbose = opt$verbose)
 
 # Denoising, save rds for dada2 object
-# PJW: changed 'multithread=T' to 'multithread=32'
+# PJW: changed 'multithread=T' to 'multithread=16'
 # See dada R help file
-dd <- dada(derep, err=err, multithread=32, pool=opt$pool)
+dd <- dada(derep, err=err, multithread=16, pool=opt$pool)
 saveRDS(dd,sprintf('%sdd.rds', opt$prefix))
 
 logmsg(sprintf("Finished denoising"))
