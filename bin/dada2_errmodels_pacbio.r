@@ -67,7 +67,7 @@ files=list.files(opt$filterDir,full.names=T)
 logmsg( sprintf("Using files: %s", files))
 #PJW. Changed 'nbases=as.double(opt$nbases)' to 'nbases=1e+06', 'multithread=TRUE' to 'multithread=32', added qualityType = "FastqQuality"
 #See R help file for learnErrors (particularly regarding multithreading and 'qualityType = "FastqQuality"')
-err <- learnErrors(files, errorEstimationFunction=PacBioErrfun, multithread=32, randomize=FALSE, verbose=opt$verbose, nbases=1e+06, qualityType = "FastqQuality")
+err <- learnErrors(files, errorEstimationFunction=PacBioErrfun, multithread=16, randomize=FALSE, verbose=opt$verbose, nbases=1e+06, qualityType = "FastqQuality")
 saveRDS(err,sprintf('%serr.rds', opt$prefix))
 
 logmsg(sprintf("Finished error estimation"))
